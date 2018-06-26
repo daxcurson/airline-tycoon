@@ -3,12 +3,21 @@ package airlinetycoon.vista;
 import java.awt.GridLayout;
 import java.io.IOException;
 
-import javax.swing.JFrame;
 import javax.swing.WindowConstants;
+
+import org.geotools.data.FileDataStore;
+import org.geotools.data.FileDataStoreFinder;
+import org.geotools.data.simple.SimpleFeatureSource;
+import org.geotools.map.FeatureLayer;
+import org.geotools.map.Layer;
+import org.geotools.map.MapContent;
+import org.geotools.styling.SLD;
+import org.geotools.styling.Style;
+import org.geotools.swing.JMapFrame;
 
 import airlinetycoon.modelo.Configurador;
 
-public class FrameAirlineTycoon extends JFrame
+public class FrameAirlineTycoon extends JMapFrame
 {
 
 	/**
@@ -17,6 +26,7 @@ public class FrameAirlineTycoon extends JFrame
 	private static final long serialVersionUID = -2207672880325147461L;
 	public FrameAirlineTycoon()
 	{
+		super();
 		// Leemos la configuracion del archivo de configuracion.
 		try
 		{
@@ -35,16 +45,29 @@ public class FrameAirlineTycoon extends JFrame
 			System.exit(1);
 		}
 	}
-	private void initComponents()
+	public void initComponents()
 	{
+		super.initComponents();
 		this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 		setSize(960,700);
 		GridLayout g=new GridLayout(2,1);
 		this.setLayout(g);
 		PanelEstado panelEstado=new PanelEstado();
 		this.add(panelEstado);
-		PanelMapa panelMapa=new PanelMapa();
-		this.add(panelMapa);
+		FileDataStore store;
+		try {
+			store = FileDataStoreFinder.getDataStore(getClass().getClassLoader().getResource("geo-data/ne_50m_admin_0_sovereignty.shp"));
+		SimpleFeatureSource featureSource=store.getFeatureSource();
+		MapContent map=new MapContent();
+		map.setTitle("Test");
+		Style style=SLD.createSimpleStyle(featureSource.getSchema());
+		Layer layer=new FeatureLayer(featureSource,style);
+		map.addLayer(layer);
+		JMapFrame.showMap(map);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	public static void main(String[] args) 
 	{

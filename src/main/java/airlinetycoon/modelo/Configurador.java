@@ -39,7 +39,7 @@ public class Configurador
 	public Object DarRepositorio(String clase) throws ClassNotFoundException,InstantiationException,IllegalAccessException
 	{
 		// Averiguo de qu� me est�n pidiendo la clase y creo un Dao seg�n el repositorio configurado.
-		Class<?> c=Class.forName("datos."+repositorio.toLowerCase()+"."+clase+"Dao"+repositorio);
+		Class<?> c=Class.forName("airlinetycoon.datos."+repositorio.toLowerCase()+"."+clase+"Dao"+repositorio);
 		return c.newInstance();
 	}
 }
