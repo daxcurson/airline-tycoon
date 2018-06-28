@@ -43,7 +43,7 @@ public class PanelMapa extends JPanel implements CambiosCiudadObserver
 	}
 	public void initComponents()
 	{
-		ciudades=new LinkedList<Ciudad>();
+		
 	}
 	public void paintComponent(Graphics g)
 	{
