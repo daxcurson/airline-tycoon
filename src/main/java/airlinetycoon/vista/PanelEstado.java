@@ -18,6 +18,6 @@ public class PanelEstado extends JPanel
 	}
 	private void initComponents()
 	{
-		
+		// Estado de la simulacion.
 	}
 }
