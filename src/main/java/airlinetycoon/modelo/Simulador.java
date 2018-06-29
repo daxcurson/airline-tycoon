@@ -12,12 +12,14 @@ public class Simulador
 	private List<CambiosCiudadObserver> cambiosCiudades;
 	private static Simulador instancia;
 	private CiudadDao ciudadDao;
+	private Reloj reloj;
 	
 	private Simulador()
 	{
 		ciudades=new LinkedList<Ciudad>();
 		cambiosCiudades=new LinkedList<CambiosCiudadObserver>();
 		ciudadDao=new CiudadDaoHibernate();
+		reloj=Reloj.getInstance();
 	}
 	public static Simulador getInstance()
 	{

@@ -53,7 +53,7 @@ public class Reloj
 		{
 			for(EventosRelojObserver o:observadoresReloj)
 			{
-				
+				o.nuevaHora(horaSimulada());
 			}
 		}
 	}
@@ -68,6 +68,8 @@ public class Reloj
 		velocidadSegundos=3;
 		TareaReloj reloj=new TareaReloj();
 		servicioEjecutor.scheduleAtFixedRate(reloj, 0, 1, TimeUnit.SECONDS);
+		TareaAvisadora avisadora=new TareaAvisadora();
+		servicioEjecutor.scheduleAtFixedRate(avisadora,0,1,TimeUnit.SECONDS);
 	}
 	public static Reloj getInstance()
 	{
@@ -85,5 +87,9 @@ public class Reloj
 		Calendar c=Calendar.getInstance();
 		c.setTimeInMillis(this.horaInicial.getTime()+this.segundosSimulados*1000);
 		return c.getTime();
+	}
+	public void agregarReceptorHora(EventosRelojObserver o)
+	{
+		this.observadoresReloj.add(o);
 	}
 }

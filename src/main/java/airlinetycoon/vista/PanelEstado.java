@@ -1,8 +1,16 @@
 package airlinetycoon.vista;
 
-import javax.swing.JPanel;
+import java.awt.GridLayout;
+import java.util.Date;
 
-public class PanelEstado extends JPanel
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+
+import airlinetycoon.modelo.EventosRelojObserver;
+import airlinetycoon.modelo.Reloj;
+
+public class PanelEstado extends JPanel implements EventosRelojObserver
 {
 
 	/**
@@ -10,6 +18,7 @@ public class PanelEstado extends JPanel
 	 */
 	private static final long serialVersionUID = 6356562904435589549L;
 	private FrameAirlineTycoon f;
+	private JTextField campoFecha;
 
 	public PanelEstado(FrameAirlineTycoon frame)
 	{
@@ -19,5 +28,20 @@ public class PanelEstado extends JPanel
 	private void initComponents()
 	{
 		// Estado de la simulacion.
+		// Filas, columnas
+		GridLayout g=new GridLayout(1,2);
+		this.setLayout(g);
+		JLabel tituloFecha=new JLabel();
+		tituloFecha.setText("Fecha");
+		this.add(tituloFecha);
+		campoFecha=new JTextField();
+		this.add(campoFecha);
+		Reloj.getInstance().agregarReceptorHora(this);
+	}
+	@Override
+	public void nuevaHora(Date hora)
+	{
+		campoFecha.setText(hora.toString());
+		repaint();
 	}
 }
