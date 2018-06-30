@@ -23,6 +23,9 @@ public class Avion extends ObjetoDominio implements java.io.Serializable {
 	private int antiguedad;
 	private int kilometros_recorridos;
 	private Ciudad ubicacion;
+	
+	@Transient
+	private Posicion posicion;
 
 	public Avion() 
 	{
@@ -111,6 +114,16 @@ public class Avion extends ObjetoDominio implements java.io.Serializable {
 	public String toString()
 	{
 		return this.nombre;
+	}
+
+	public Posicion getPosicion()
+	{
+		return posicion;
+	}
+
+	public void setPosicion(Posicion posicion)
+	{
+		this.posicion = posicion;
 	}
 
 }

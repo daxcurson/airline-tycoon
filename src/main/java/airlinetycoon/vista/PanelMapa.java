@@ -11,14 +11,18 @@ import java.util.LinkedList;
 import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 
+import airlinetycoon.modelo.Avion;
+import airlinetycoon.modelo.CambiosAvionObserver;
 import airlinetycoon.modelo.CambiosCiudadObserver;
 import airlinetycoon.modelo.Ciudad;
+import airlinetycoon.modelo.Posicion;
 
-public class PanelMapa extends JPanel implements CambiosCiudadObserver
+public class PanelMapa extends JPanel implements CambiosCiudadObserver,CambiosAvionObserver
 {
 	private BufferedImage mapa;
+	private BufferedImage avion;
 	private LinkedList<Ciudad> ciudades;
-
+	private LinkedList<Avion> aviones;
 	/**
 	 * 
 	 */
@@ -26,15 +30,17 @@ public class PanelMapa extends JPanel implements CambiosCiudadObserver
 
 	public PanelMapa()
 	{
-		cargarMapa();
+		cargarImagenes();
 		initComponents();
 	}
-	public void cargarMapa()
+	public void cargarImagenes()
 	{
-		URL url = ClassLoader.getSystemResource("mapa.jpg");
+		URL urlmapa = ClassLoader.getSystemResource("mapa.jpg");
+		URL urlavion=ClassLoader.getSystemResource("avion.gif");
 		try
 		{
-			mapa=ImageIO.read(url);
+			mapa=ImageIO.read(urlmapa);
+			avion=ImageIO.read(urlavion);
 		}
 		catch(IOException e)
 		{
@@ -44,6 +50,7 @@ public class PanelMapa extends JPanel implements CambiosCiudadObserver
 	public void initComponents()
 	{
 		ciudades=new LinkedList<Ciudad>();
+		aviones=new LinkedList<Avion>();
 	}
 	public void paintComponent(Graphics g)
 	{
@@ -59,11 +66,26 @@ public class PanelMapa extends JPanel implements CambiosCiudadObserver
 			g2.setColor(Color.black);
 			g2.drawOval(Xciudad-3, Yciudad-3, 6, 6);
 		}
+		// Dibujamos los aviones.
+		for(Avion a:aviones)
+		{
+			// El dibujito del avion tiene que estar centrado.
+			Posicion posicion=a.getPosicion();
+			int Xavion=(int)(posicion.getLongitud()*(avion.getWidth()/2)/180+avion.getWidth()/2);
+			int Yavion=(int)(avion.getHeight()/2-posicion.getLatitud()*(avion.getHeight()/2)/90);
+			g2.drawImage(avion, Xavion, Yavion, avion.getWidth(), avion.getHeight(), this);
+		}
 	}
 	@Override
 	public void agregarCiudad(Ciudad c)
 	{
 		ciudades.add(c);
+		repaint();
+	}
+	@Override
+	public void agregarAvion(Avion avion)
+	{
+		aviones.add(avion);
 		repaint();
 	}
 }

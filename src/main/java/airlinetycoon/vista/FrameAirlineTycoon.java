@@ -4,9 +4,13 @@ import java.awt.GridLayout;
 import java.io.IOException;
 
 import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.WindowConstants;
 
 import airlinetycoon.modelo.Configurador;
+import airlinetycoon.modelo.Reloj;
 import airlinetycoon.modelo.Simulador;
 
 public class FrameAirlineTycoon extends JFrame
@@ -19,6 +23,13 @@ public class FrameAirlineTycoon extends JFrame
 	
 	private Simulador simulador;
 	private PanelMapa panelMapa;
+	private PanelEstado panelEstado;
+	
+	private JMenuBar menubar;
+	private JMenu aviones;
+	private JMenuItem avionesComprarAvion;
+	private JMenuItem avionesVenderAvion;
+	private JMenuItem avionesListar;
 	
 	public FrameAirlineTycoon()
 	{
@@ -45,6 +56,8 @@ public class FrameAirlineTycoon extends JFrame
 	{
 		simulador=Simulador.getInstance();
 		simulador.agregarCiudadObserver(panelMapa);
+		simulador.agregarAvionObserver(panelMapa);
+		simulador.agregarDineroObserver(panelEstado);
 		simulador.cargarDatosIniciales();
 	}
 	private void initComponents()
@@ -55,8 +68,22 @@ public class FrameAirlineTycoon extends JFrame
 		this.setLayout(g);
 		panelMapa=new PanelMapa();
 		this.add(panelMapa);
-		PanelEstado panelEstado=new PanelEstado(this);
+		panelEstado=new PanelEstado(this);
 		this.add(panelEstado);
+		
+		// Menu de acciones
+		menubar=new JMenuBar();
+		aviones=new JMenu();
+		aviones.setText("Aviones");
+		menubar.add(aviones);
+		avionesComprarAvion=new JMenuItem();
+		avionesComprarAvion.setText("Comprar...");
+		aviones.add(avionesComprarAvion);
+		avionesVenderAvion=new JMenuItem("Vender...");
+		aviones.add(avionesVenderAvion);
+		avionesListar=new JMenuItem();
+		avionesListar.setText("Listar...");
+		aviones.add(avionesListar);
 	}
 	public static void main(String[] args) 
 	{
@@ -66,6 +93,14 @@ public class FrameAirlineTycoon extends JFrame
 	public void salir()
 	{
 		System.exit(0);
+	}
+	public void iniciarSimulacion()
+	{
+		Reloj.getInstance().iniciarReloj();
+	}
+	public void pararSimulacion()
+	{
+		Reloj.getInstance().pararReloj();
 	}
 }
 

@@ -66,16 +66,24 @@ public class Reloj
 		// La velocidad tendria que poder ser elegida por el usuario, por ahora
 		// la vamos a hard-codear.
 		velocidadSegundos=3;
-		TareaReloj reloj=new TareaReloj();
-		servicioEjecutor.scheduleAtFixedRate(reloj, 0, 1, TimeUnit.SECONDS);
-		TareaAvisadora avisadora=new TareaAvisadora();
-		servicioEjecutor.scheduleAtFixedRate(avisadora,0,1,TimeUnit.SECONDS);
 	}
 	public static Reloj getInstance()
 	{
 		if(instance==null)
 			instance=new Reloj();
 		return instance;
+	}
+	public void iniciarReloj()
+	{
+		horaInicial=new Date();
+		TareaReloj reloj=new TareaReloj();
+		servicioEjecutor.scheduleAtFixedRate(reloj, 0, 1, TimeUnit.SECONDS);
+		TareaAvisadora avisadora=new TareaAvisadora();
+		servicioEjecutor.scheduleAtFixedRate(avisadora,0,1,TimeUnit.SECONDS);
+	}
+	public void pararReloj()
+	{
+		servicioEjecutor.shutdownNow();
 	}
 	/**
 	 * Da la hora simulada del momento en que se pide, calculada como la cantidad
