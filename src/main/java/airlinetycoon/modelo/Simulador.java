@@ -5,7 +5,6 @@ import java.util.LinkedList;
 import java.util.List;
 
 import airlinetycoon.datos.CiudadDao;
-import airlinetycoon.datos.hibernate.CiudadDaoHibernate;
 
 public class Simulador
 {
@@ -26,7 +25,22 @@ public class Simulador
 		cambiosCiudades=new LinkedList<CambiosCiudadObserver>();
 		cambiosAviones=new LinkedList<CambiosAvionObserver>();
 		cambiosDinero=new LinkedList<CambiosDineroObserver>();
-		ciudadDao=new CiudadDaoHibernate();
+		try
+		{
+			ciudadDao=(CiudadDao) Configurador.getInstance().DarRepositorio("Ciudad");
+		} 
+		catch (ClassNotFoundException e)
+		{
+			e.printStackTrace();
+		} 
+		catch (InstantiationException e)
+		{
+			e.printStackTrace();
+		} 
+		catch (IllegalAccessException e)
+		{
+			e.printStackTrace();
+		}
 		dinero=new BigDecimal(0);
 		//reloj=Reloj.getInstance();
 	}

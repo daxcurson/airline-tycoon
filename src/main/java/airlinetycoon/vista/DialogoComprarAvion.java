@@ -54,7 +54,7 @@ public class DialogoComprarAvion extends JDialog implements ActionListener
 				new Object[][] {
 				},
 				new String[] {
-						"Marca", "Modelo","Autonomia (km)","Consumo (l/h)","Velocidad (km/h)","Capacidad (pasajeros)"
+						"Modelo","Autonomia (km)","Consumo (l/h)","Velocidad (km/h)","Capacidad (pasajeros)"
 				}
 				);
 		table.setModel(model);
@@ -62,12 +62,11 @@ public class DialogoComprarAvion extends JDialog implements ActionListener
 		{
 			Object[] datos=new Object[7];
 			datos[0]=avion;
-			datos[1]=avion.getMarca();
-			datos[2]=avion.getModelo();
-			datos[3]=avion.getAutonomia();
-			datos[4]=avion.getConsumo();
-			datos[5]=avion.getVelocidad();
-			datos[6]=avion.getCapacidad();
+			datos[1]=avion.getModelo();
+			datos[2]=avion.getAutonomia();
+			datos[3]=avion.getConsumo();
+			datos[4]=avion.getVelocidad();
+			datos[5]=avion.getCapacidad();
 			model.addRow(datos);
 		}
 		setModal(true);

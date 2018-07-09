@@ -48,6 +48,7 @@ CambiosDineroObserver
 		// Plata, plata, PLATA!!!!
 		JLabel tituloDinero=new JLabel();
 		tituloDinero.setText("Dinero");
+		this.add(tituloDinero);
 		campoDinero=new JTextField();
 		this.add(campoDinero);
 		Reloj.getInstance().agregarReceptorHora(this);

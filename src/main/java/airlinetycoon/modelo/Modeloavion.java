@@ -23,7 +23,6 @@ public class Modeloavion extends ObjetoDominio implements java.io.Serializable
 	private static final long serialVersionUID = 1L;
 	private Integer id;
 	private int version;
-	private String marca;
 	private String modelo;
 	private double autonomia;
 	private double velocidad;
@@ -34,9 +33,8 @@ public class Modeloavion extends ObjetoDominio implements java.io.Serializable
 	public Modeloavion() {
 	}
 
-	public Modeloavion(String marca, String modelo, double autonomia, double consumo,
+	public Modeloavion(String modelo, double autonomia, double consumo,
 			double capacidad, double tanque) {
-		this.marca = marca;
 		this.modelo = modelo;
 		this.autonomia = autonomia;
 		this.consumo = consumo;
@@ -63,15 +61,6 @@ public class Modeloavion extends ObjetoDominio implements java.io.Serializable
 
 	public void setVersion(int version) {
 		this.version = version;
-	}
-
-	@Column(name = "marca", nullable = false, length = 20)
-	public String getMarca() {
-		return this.marca;
-	}
-
-	public void setMarca(String marca) {
-		this.marca = marca;
 	}
 
 	@Column(name = "modelo", nullable = false, length = 50)
