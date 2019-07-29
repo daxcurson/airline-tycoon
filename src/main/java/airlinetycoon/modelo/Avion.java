@@ -22,12 +22,16 @@ public class Avion extends ObjetoDominio implements java.io.Serializable {
 	private Modeloavion modelo;
 	private int antiguedad;
 	private int kilometros_recorridos;
-	private Ciudad ubicacion;
+	private Aeropuerto ubicacion;
+	private EstadoAvion estado;
+	private AlertaAvion alerta;
 	
 	private Posicion posicion;
 
 	public Avion() 
 	{
+		estado=EstadoAvion.TIERRA;
+		alerta=AlertaAvion.NORMAL;
 	}
 
 	public Avion(String nombre, Modeloavion modelo, int antiguedad,
@@ -101,12 +105,12 @@ public class Avion extends ObjetoDominio implements java.io.Serializable {
 	@ManyToOne
 	@Basic(fetch=FetchType.LAZY)
 	@JoinColumn(name="ubicacion",referencedColumnName="id")
-	public Ciudad getUbicacion() 
+	public Aeropuerto getUbicacion() 
 	{
 		return ubicacion;
 	}
 	
-	public void setUbicacion(Ciudad ubicacion) 
+	public void setUbicacion(Aeropuerto ubicacion) 
 	{
 		this.ubicacion = ubicacion;
 	}
@@ -124,6 +128,22 @@ public class Avion extends ObjetoDominio implements java.io.Serializable {
 	public void setPosicion(Posicion posicion)
 	{
 		this.posicion = posicion;
+	}
+
+	public EstadoAvion getEstado() {
+		return estado;
+	}
+
+	public void setEstado(EstadoAvion estado) {
+		this.estado = estado;
+	}
+
+	public AlertaAvion getAlerta() {
+		return alerta;
+	}
+
+	public void setAlerta(AlertaAvion alerta) {
+		this.alerta = alerta;
 	}
 
 }

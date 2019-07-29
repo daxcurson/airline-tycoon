@@ -1,6 +1,8 @@
 package airlinetycoon.modelo;
 
 import java.io.Serializable;
+import java.util.List;
+
 import javax.persistence.*;
 
 /**
@@ -11,10 +13,12 @@ import javax.persistence.*;
 public class Ciudad extends ObjetoDominio implements Serializable 
 {
 	@Id
+	@GeneratedValue
 	private int id;
 	private String nombre;
 	private double latitud;
 	private double longitud;
+	private List<Aeropuerto> aeropuertos;
 	private static final long serialVersionUID = 1L;
 
 	public Ciudad() 
@@ -64,6 +68,14 @@ public class Ciudad extends ObjetoDominio implements Serializable
 	public String toString()
 	{
 		return this.nombre;
+	}
+
+	public List<Aeropuerto> getAeropuertos() {
+		return aeropuertos;
+	}
+
+	public void setAeropuertos(List<Aeropuerto> aeropuertos) {
+		this.aeropuertos = aeropuertos;
 	}
 
 }

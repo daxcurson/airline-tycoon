@@ -57,7 +57,7 @@ public class Simulador
 			this.agregarCiudad(c);
 		// Aca cargo un dinero inicial.
 		dinero=new BigDecimal(10000000.00);
-		this.cambiarDinero();
+		this.dispararCambioDinero();
 	}
 	private void agregarCiudad(Ciudad c)
 	{
@@ -87,7 +87,7 @@ public class Simulador
 			o.agregarAvion(a);
 		}
 	}
-	public void cambiarDinero()
+	public void dispararCambioDinero()
 	{
 		for(CambiosDineroObserver o:cambiosDinero)
 		{
