@@ -77,5 +77,21 @@ public class Ciudad extends ObjetoDominio implements Serializable
 	public void setAeropuertos(List<Aeropuerto> aeropuertos) {
 		this.aeropuertos = aeropuertos;
 	}
-
+	public boolean equals(Object o)
+	{
+		boolean resultado=false;
+		if(o instanceof Ciudad)
+		{
+			Ciudad otra=(Ciudad)o;
+			if(otra.longitud==this.longitud &&
+					otra.latitud==this.latitud &&
+					otra.nombre.equals(this.nombre))
+			{
+				// Si tienen la misma longitud, latitud y nombre
+				// asumo que son iguales. No me preocupo por la lista de aeropuertos.
+				resultado=true;
+			}
+		}
+		return resultado;
+	}
 }
