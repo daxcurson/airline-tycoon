@@ -18,6 +18,7 @@ public class Ciudad extends ObjetoDominio implements Serializable
 	private String nombre;
 	private double latitud;
 	private double longitud;
+	@OneToMany(mappedBy="ciudad")
 	private List<Aeropuerto> aeropuertos;
 	private static final long serialVersionUID = 1L;
 

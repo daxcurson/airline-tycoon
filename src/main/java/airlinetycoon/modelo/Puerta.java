@@ -5,6 +5,8 @@ import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 @Entity
 public class Puerta extends ObjetoDominio implements Serializable 
@@ -17,6 +19,9 @@ public class Puerta extends ObjetoDominio implements Serializable
 	@GeneratedValue
 	private long id;
 	private String nombre;
+	@ManyToOne
+	@JoinColumn(name="aeropuerto_id")
+	private Aeropuerto aeropuerto;
 	public long getId() {
 		return id;
 	}
@@ -28,5 +33,11 @@ public class Puerta extends ObjetoDominio implements Serializable
 	}
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
+	}
+	public Aeropuerto getAeropuerto() {
+		return aeropuerto;
+	}
+	public void setAeropuerto(Aeropuerto aeropuerto) {
+		this.aeropuerto = aeropuerto;
 	}
 }

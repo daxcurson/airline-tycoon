@@ -10,31 +10,27 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="hangar")
-public class Hangar extends ObjetoDominio implements Serializable 
+@Table(name="aeropuerto_aerolinea")
+public class AeropuertoAerolinea extends ObjetoDominio implements Serializable
 {
 
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -5439458340022879300L;
+	private static final long serialVersionUID = -9116520255171168274L;
 	@Id
 	@GeneratedValue
 	private long id;
-	private String nombre;
-	@ManyToOne
-	@JoinColumn(name="aeropuerto_id")
-	private Aeropuerto aeropuerto;
 	public long getId() {
 		return id;
 	}
 	public void setId(long id) {
 		this.id = id;
 	}
-	public String getNombre() {
-		return nombre;
-	}
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
+	@ManyToOne
+	@JoinColumn(name="aeropuerto_id")
+	private Aeropuerto aeropuerto;
+	@ManyToOne
+	@JoinColumn(name="aerolinea_id")
+	private Aerolinea aerolinea;
 }

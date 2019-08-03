@@ -16,12 +16,13 @@ public class Configurador
 	private String archivoConfiguracion;
 	private String repositorio;
 	
-	private Configurador()
+	private Configurador() throws NullPointerException, IOException
 	{
 		archivoConfiguracion=new String();
 		archivoConfiguracion="configuration.properties";
+		LeerConfiguracion();
 	}
-	public static Configurador getInstance()
+	public static Configurador getInstance() throws NullPointerException, IOException
 	{
 		if(instance==null)
 			instance=new Configurador();

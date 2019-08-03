@@ -6,6 +6,7 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Aeropuerto extends ObjetoDominio implements Serializable
@@ -20,8 +21,11 @@ public class Aeropuerto extends ObjetoDominio implements Serializable
 	private Ciudad ciudad;
 	private String codigo;
 	private String nombre;
+	@OneToMany(mappedBy="aeropuerto")
 	private List<Puerta> puertas;
+	@OneToMany(mappedBy="aeropuerto")
 	private List<Pista> pistas;
+	@OneToMany(mappedBy="aeropuerto")
 	private List<Hangar> hangares;
 	public Ciudad getCiudad() {
 		return ciudad;

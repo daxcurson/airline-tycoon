@@ -15,6 +15,9 @@ public class Pista extends ObjetoDominio implements Serializable
 	private long id;
 	private String nombre;
 	private long longitud;
+	@ManyToOne
+	@JoinColumn(name="aeropuerto_id")
+	private Aeropuerto aeropuerto;
 	
 	public long getId() {
 		return id;
@@ -33,5 +36,11 @@ public class Pista extends ObjetoDominio implements Serializable
 	}
 	public void setLongitud(long longitud) {
 		this.longitud = longitud;
+	}
+	public Aeropuerto getAeropuerto() {
+		return aeropuerto;
+	}
+	public void setAeropuerto(Aeropuerto aeropuerto) {
+		this.aeropuerto = aeropuerto;
 	}
 }

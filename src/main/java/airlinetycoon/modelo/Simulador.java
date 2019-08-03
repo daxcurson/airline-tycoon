@@ -1,5 +1,6 @@
 package airlinetycoon.modelo;
 
+import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.LinkedList;
 import java.util.List;
@@ -40,6 +41,10 @@ public class Simulador
 		catch (IllegalAccessException e)
 		{
 			e.printStackTrace();
+		} catch (NullPointerException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 		dinero=new BigDecimal(0);
 		//reloj=Reloj.getInstance();
@@ -52,12 +57,16 @@ public class Simulador
 	}
 	public void cargarDatosIniciales()
 	{
-		java.util.List<Ciudad> listaCiudades=ciudadDao.readAll();
-		for(Ciudad c:listaCiudades)
-			this.agregarCiudad(c);
+		cargarCiudades();
 		// Aca cargo un dinero inicial.
 		dinero=new BigDecimal(10000000.00);
 		this.dispararCambioDinero();
+	}
+	public void cargarCiudades()
+	{
+		java.util.List<Ciudad> listaCiudades=ciudadDao.readAll();
+		for(Ciudad c:listaCiudades)
+			this.agregarCiudad(c);
 	}
 	private void agregarCiudad(Ciudad c)
 	{

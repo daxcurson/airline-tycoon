@@ -159,6 +159,14 @@ public class FrameAirlineTycoon extends JFrame implements ActionListener
 		catch (IllegalAccessException e)
 		{
 			e.printStackTrace();
+		} 
+		catch (NullPointerException e) 
+		{
+			e.printStackTrace();
+		} 
+		catch (IOException e) 
+		{
+			e.printStackTrace();
 		}
 	}
 }

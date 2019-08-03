@@ -1,4 +1,4 @@
-package airlinetycoon.simulador;
+package airlinetycoon.modelo;
 
 import java.util.LinkedList;
 import java.util.List;
@@ -6,10 +6,7 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-
-import airlinetycoon.modelo.Aeropuerto;
-import airlinetycoon.modelo.Avion;
-import airlinetycoon.modelo.Tripulante;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Aerolinea 
@@ -17,7 +14,9 @@ public class Aerolinea
 	@Id
 	@GeneratedValue
 	private long id;
+	@OneToMany(mappedBy="aerolinea")
 	private List<Avion> aviones;
+	@OneToMany(mappedBy="aerolinea")
 	private List<Aeropuerto> aeropuertos;
 	private double dinero;
 	private String nombre;
