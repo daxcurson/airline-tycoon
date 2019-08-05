@@ -35,4 +35,18 @@ public class CiudadDaoHibernate implements CiudadDao
 		
 	}
 
+	@Override
+	public Ciudad readByName(String name) 
+	{
+		EntityManager manager = SessionManager.getEntityManager("aerolinea"); 
+		EntityTransaction tran = manager.getTransaction(); 
+		tran.begin(); 
+		Query query = manager.createQuery("select c from Ciudad c join fetch c.aeropuertos where c.nombre=:name");
+		query.setParameter("name", name);
+		Ciudad resultado=(Ciudad) query.getSingleResult();
+		tran.commit(); 
+		manager.close(); 
+		return resultado;
+	}
+
 }
