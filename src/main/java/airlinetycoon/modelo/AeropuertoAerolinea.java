@@ -21,16 +21,29 @@ public class AeropuertoAerolinea extends ObjetoDominio implements Serializable
 	@Id
 	@GeneratedValue
 	private long id;
-	public long getId() {
-		return id;
-	}
-	public void setId(long id) {
-		this.id = id;
-	}
 	@ManyToOne
 	@JoinColumn(name="aeropuerto_id")
 	private Aeropuerto aeropuerto;
 	@ManyToOne
 	@JoinColumn(name="aerolinea_id")
 	private Aerolinea aerolinea;
+
+	public long getId() {
+		return id;
+	}
+	public void setId(long id) {
+		this.id = id;
+	}
+	public Aeropuerto getAeropuerto() {
+		return aeropuerto;
+	}
+	public void setAeropuerto(Aeropuerto aeropuerto) {
+		this.aeropuerto = aeropuerto;
+	}
+	public Aerolinea getAerolinea() {
+		return aerolinea;
+	}
+	public void setAerolinea(Aerolinea aerolinea) {
+		this.aerolinea = aerolinea;
+	}
 }

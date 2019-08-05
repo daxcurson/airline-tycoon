@@ -13,7 +13,7 @@ public class CiudadDaoHibernate implements CiudadDao
 		EntityManager manager = SessionManager.getEntityManager("aerolinea"); 
 		EntityTransaction tran = manager.getTransaction(); 
 		tran.begin(); 
-		Query query = manager.createQuery("select c from Ciudad c"); 
+		Query query = manager.createQuery("select c from Ciudad c join fetch c.aeropuertos"); 
 		@SuppressWarnings("unchecked")
 		List<Ciudad> list = query.getResultList();
 		tran.commit(); 

@@ -17,15 +17,14 @@ public class Aerolinea
 	@OneToMany(mappedBy="aerolinea")
 	private List<Avion> aviones;
 	@OneToMany(mappedBy="aerolinea")
-	private List<Aeropuerto> aeropuertos;
+	private List<AeropuertoAerolinea> aeropuertos;
 	private double dinero;
 	private String nombre;
-	private List<Tripulante> personal;
 	
 	public Aerolinea()
 	{
 		aviones=new LinkedList<Avion>();
-		aeropuertos=new LinkedList<Aeropuerto>();
+		aeropuertos=new LinkedList<AeropuertoAerolinea>();
 		dinero=0.00;
 	}
 	
@@ -35,10 +34,10 @@ public class Aerolinea
 	public void setAviones(List<Avion> aviones) {
 		this.aviones = aviones;
 	}
-	public List<Aeropuerto> getAeropuertos() {
+	public List<AeropuertoAerolinea> getAeropuertos() {
 		return aeropuertos;
 	}
-	public void setAeropuertos(List<Aeropuerto> aeropuertos) {
+	public void setAeropuertos(List<AeropuertoAerolinea> aeropuertos) {
 		this.aeropuertos = aeropuertos;
 	}
 
@@ -64,13 +63,5 @@ public class Aerolinea
 
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
-	}
-
-	public List<Tripulante> getPersonal() {
-		return personal;
-	}
-
-	public void setPersonal(List<Tripulante> personal) {
-		this.personal = personal;
 	}
 }
