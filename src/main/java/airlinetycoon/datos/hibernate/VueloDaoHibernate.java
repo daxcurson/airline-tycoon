@@ -7,7 +7,7 @@ import airlinetycoon.datos.VueloDao;
 import airlinetycoon.modelo.Vuelo;
 
 
-public class VueloDaoHibernate implements VueloDao 
+public class VueloDaoHibernate extends GenericDaoImpl<Vuelo> implements VueloDao 
 {
 	/* (non-Javadoc)
 	 * @see datos.hibernate.VueloDao#readAll()
@@ -25,16 +25,14 @@ public class VueloDaoHibernate implements VueloDao
 		return list;
 	}
 
-	public void save(Vuelo a) 
-	{
-		// TODO Auto-generated method stub
-		
+	@Override
+	protected String selectAll() {
+		return "select a from Vuelo a";
 	}
 
 	@Override
-	public Vuelo readById(int id) {
-		// TODO Auto-generated method stub
-		return null;
+	protected String selectById() {
+		return "select a from Vuelo a where a.id=";
 	}
 
 }

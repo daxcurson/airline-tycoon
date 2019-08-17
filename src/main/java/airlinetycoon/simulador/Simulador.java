@@ -1,6 +1,8 @@
 package airlinetycoon.simulador;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -15,7 +17,8 @@ public class Simulador
 	private static Simulador me;
 	private List<Ciudad> ciudades;
 	private AgenciaViajes agencia;
-	private List<Modeloavion> modelos;
+	private HashMap<String,Modeloavion> modelos;
+	private double precioKerosene;
 	
 	private Simulador()
 	{
@@ -23,6 +26,14 @@ public class Simulador
 		setAgencia(new AgenciaViajes());
 		cargarCiudades();
 		cargarModelosAvion();
+		// quiza tenga que haber una petrolera que provea el petroleo???
+		// Por ahora simplemente vamos a dar un precio, que podra ser o no
+		// actualizado con algun criterio.
+		precioKerosene=10; //en $ por litro
+	}
+	public double getPrecioKerosene()
+	{
+		return precioKerosene;
 	}
 	public static Simulador getInstance()
 	{
@@ -33,7 +44,7 @@ public class Simulador
 	public List<Ciudad> getCiudades() {
 		return ciudades;
 	}
-	public List<Modeloavion> getModelosAvion()
+	public HashMap<String,Modeloavion> getModelosAvion()
 	{
 		return modelos;
 	}
@@ -50,13 +61,24 @@ public class Simulador
 	{
 		ciudades.add(c);
 	}
+	public Modeloavion getModelo(String modelo)
+	{
+		return modelos.get(modelo);
+	}
 	private void cargarModelosAvion()
 	{
 		ModeloavionDao modeloavionDao;
+		modelos=new HashMap<String,Modeloavion>();
 		try
 		{
 			modeloavionDao=(ModeloavionDao) Configurador.getInstance().DarRepositorio("Modeloavion");
-			modelos=modeloavionDao.readAll();
+			List<Modeloavion> modelosAvion=modeloavionDao.readAll();
+			Iterator<Modeloavion> i=modelosAvion.listIterator();
+			while(i.hasNext())
+			{
+				Modeloavion a=i.next();
+				modelos.put(a.getModelo(), a);
+			}
 		}
 		catch (ClassNotFoundException e)
 		{
